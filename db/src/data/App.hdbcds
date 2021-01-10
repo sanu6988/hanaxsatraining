@@ -1,0 +1,31 @@
+context App {
+
+    /*@@layout{"layoutInfo":{"x":-757.5,"y":-148}}*/
+    type TName : String(255);
+
+    /*@@layout{"layoutInfo":{"x":-712,"y":-105.5}}*/
+    entity Users {
+        key ID          : String(10) not null;
+            FIRSTNAME   : App.TName;
+            LASTNAME    : App.TName;
+            GENDER      : String(6);
+            EMAIL       : String(60);
+            PHONE       : String(40);
+            PASSWORD    : String(16);
+            COUNTRY     : String(2);
+            USERCOUNTRY : association[1, 0..1] to App.Country { CODE };
+    };
+
+    /*@@layout{"layoutInfo":{"x":-942,"y":-101.5}}*/
+    entity Country {
+        key CODE : String(2);
+            NAME : String(60);
+    };
+    
+    define view CDSUser as select from Users{
+    	FIRSTNAME,
+    	LASTNAME,
+    	EMAIL,
+    	USERCOUNTRY.NAME
+    };
+};
