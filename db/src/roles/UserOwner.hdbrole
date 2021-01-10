@@ -1,0 +1,18 @@
+{
+  "role": {
+    "name": "UserOwner#",
+    "schema_privileges": [
+      {
+        "privileges_with_grant_option": [
+          "CREATE TEMPORARY TABLE",
+          "DELETE",
+          "INSERT",
+          "SELECT",
+          "SELECT CDS METADATA",
+          "SELECT METADATA",
+          "UPDATE"
+        ]
+      }
+    ]
+  }
+}
