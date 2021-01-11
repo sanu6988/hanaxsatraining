@@ -5,12 +5,40 @@ version: 0.0.1
 modules:
  - name: db
    type: hdb
-   path: db
+   path: db2
    requires:
     - name: hdi_db
+
+
+ 
+
+
+ - name: db3
+   type: hdb
+   path: db3
+   requires:
+    - name: hdi_db3
 
 resources:
  - name: hdi_db
    properties:
       hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container
+
+ - name: hdi_db_2
+   parameters:
+      config:
+         schema: ABXSA
+   properties:
+      hdi-container-name_2: ${service-name}
+   type: com.sap.xs.hdi-container
+
+
+ - name: hdi_db3
+   parameters:
+      config:
+         schema: ABXSA
+   properties:
+      hdi-container-name_3: ${service-name}
+   type: com.sap.xs.hdi-container
+

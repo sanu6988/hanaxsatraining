@@ -1,0 +1,107 @@
+namespace ab.data;
+
+context MasterData {
+
+    /*@@layout{"layoutInfo":{"x":-1830.5,"y":-69}}*/
+    type BusinessKey : String(10);
+
+    /*@@layout{"layoutInfo":{"x":-1830.5,"y":-172}}*/
+    type SDate : UTCDateTime;
+
+    /*@@layout{"layoutInfo":{"x":-1815.5,"y":-265}}*/
+    type CurrencyT : String(5);
+
+    /*@@layout{"layoutInfo":{"x":-1835.5,"y":-338}}*/
+    type AmountT : Decimal(15, 2);
+
+    /*@@layout{"layoutInfo":{"x":-1841.5,"y":-409}}*/
+    type QuantityT : Decimal(13, 3);
+
+    /*@@layout{"layoutInfo":{"x":-2283.5,"y":-463}}*/
+    type UnitT : String(3);
+
+    /*@@layout{"layoutInfo":{"x":-2700.5,"y":-394}}*/
+    type StatusT : String(1);
+
+    /*@@layout{"layoutInfo":{"x":-2421,"y":-339.5}}*/
+    entity Employee {
+        EMPLOYEEID    : Integer;
+        NAME          : MasterData.Name;
+        SEX           : String(1);
+        LANGUAGE      : String(1);
+        PHONENUMBER   : String(30);
+        EMAILADDRESS  : String(255);
+        LOGINNAME     : String(12);
+        CURRENCY      : String(5);
+        SALARYAMOUNT  : Decimal(15, 2);
+        ACCOUNTNUMBER : String(10);
+        ADDRESSES     : association[1, 0..1] to MasterData.Address { ADDRESSID };
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2216,"y":-354.5}}*/
+    type Name {
+        FIRST    : String(40);
+        MIDDLE   : String(40);
+        LAST     : String(40);
+        INITIALS : String(10);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2171,"y":-236.5}}*/
+    type HistoryT {
+        CREATEDBY : String(10);
+        CREATEDAT : LocalDate;
+        CHANGEDAT : LocalDate;
+        CHANGEDBY : String(10);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2675,"y":-319.5}}*/
+    entity Address {
+        key ADDRESSID   : Integer not null;
+            CITY        : String(40);
+            POSTALCODE  : String(10);
+            STREET      : String(60);
+            BUILDING    : String(10);
+            COUNTRY     : String(3);
+            REGION      : String(4);
+            ADDRESSTYPE : String(2);
+            LATITUDE    : Double;
+            LONGITUDE   : Double;
+            POINT       : hana.ST_POINT;
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2149,"y":-72.5}}*/
+    entity Product {
+        key PRODUCTID     : String(10) not null;
+            TYPECODE      : String(4);
+            CATEGORY      : String(40);
+            HISTORY       : MasterData.HistoryT;
+            TAXTARIFFCODE : String(1);
+            CURRENCY      : String(4);
+            PRICE         : Decimal(15, 2);
+            NAMEID        : String(10);
+            DESCID        : String(10);
+            SUPPLIER      : association[1, 0..1] to MasterData.Partner { PARTNERID };
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2437,"y":-54.5}}*/
+    entity Partner {
+        PARTNERID    : Integer;
+        PARTNERROLE  : String(3);
+        EMAILADDRESS : String(255);
+        PHONENUMBER  : String(30);
+        FAXNUMBER    : String(30);
+        WEBADDRESS   : String(1024);
+        COMPANYNAME  : String(80);
+        HISTORY      : MasterData.HistoryT;
+        CURRENCY     : String(10);
+        ADDRESSES    : association[1, 0..1] to MasterData.Address { ADDRESSID };
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2700,"y":-29.5}}*/
+    entity Texts {
+        key TEXTID      : String(10) not null;
+            LANGUAGE    : String(2);
+            ISOLANGUAGE : String(2);
+            TEXT        : String(24);
+    };
+};
