@@ -48,10 +48,10 @@ context MasterData {
 
     /*@@layout{"layoutInfo":{"x":-2171,"y":-236.5}}*/
     type HistoryT {
-        CREATEDBY : String(10);
+        CREATEDBY : association[1, 0..1] to MasterData.Employee { EMPLOYEEID };
         CREATEDAT : LocalDate;
+        CHANGEDBY : association[1, 0..1] to MasterData.Employee { EMPLOYEEID };
         CHANGEDAT : LocalDate;
-        CHANGEDBY : String(10);
     };
 
     /*@@layout{"layoutInfo":{"x":-2675,"y":-319.5}}*/
@@ -102,6 +102,6 @@ context MasterData {
         key TEXTID      : String(10) not null;
             LANGUAGE    : String(2);
             ISOLANGUAGE : String(2);
-            TEXT        : String(24);
+            TEXT        : String(1024);
     };
 };
