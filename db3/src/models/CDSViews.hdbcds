@@ -12,6 +12,21 @@ context CDSViews {
 		COMPANYNAME as Company
 	}where CURRENCY = 'USD';
 	
+/*	view "FlightView" as select from SBOOK as sb
+	inner join SFLIGHT as sp on sb.carrid = sp.carrid and sb.connid = sp.connid and sb.fldate = sp.fldate
+	{
+		sb.CARRID,
+		sb.CONNID,
+		sb.FLDATE,
+		sb.BOOKID,
+		sb.LUGGWEIGHT,
+		sb.COUNTER,
+		sp.PRICE,
+		sp.CURRENCY,
+		sp.SEATSMAX
+	};*/
+	
+
 	view "POrders" as select from TR.PurchaseOrder{
 		PURCHASEORDERID as OrderId,
 		PARTNER.PARTNERID as SupplierId,
